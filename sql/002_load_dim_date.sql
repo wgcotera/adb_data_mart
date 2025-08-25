@@ -1,0 +1,29 @@
+USE dm_ecommerce;
+
+TRUNCATE TABLE dim_date;  -- descomenta si quieres reinicializar
+
+INSERT INTO dim_date
+  (`date_sk`, `full_date`, `day`, `month`, `month_name`, `year`, `quarter`, `week_of_year`, `is_weekend`)
+SELECT
+  CAST(DATE_FORMAT(DATE_ADD('2018-01-01', INTERVAL seq.n DAY), '%Y%m%d') AS UNSIGNED) AS date_sk,
+  DATE_ADD('2018-01-01', INTERVAL seq.n DAY)                                 AS full_date,
+  DAY(        DATE_ADD('2018-01-01', INTERVAL seq.n DAY))                     AS `day`,
+  MONTH(      DATE_ADD('2018-01-01', INTERVAL seq.n DAY))                     AS `month`,
+  DATE_FORMAT(DATE_ADD('2018-01-01', INTERVAL seq.n DAY), '%M')               AS month_name,
+  YEAR(       DATE_ADD('2018-01-01', INTERVAL seq.n DAY))                     AS `year`,
+  QUARTER(    DATE_ADD('2018-01-01', INTERVAL seq.n DAY))                     AS `quarter`,
+  WEEKOFYEAR( DATE_ADD('2018-01-01', INTERVAL seq.n DAY))                     AS week_of_year,
+  IF(DAYOFWEEK(DATE_ADD('2018-01-01', INTERVAL seq.n DAY)) IN (1,7), 1, 0)    AS is_weekend
+FROM (
+  -- Genera 0..9999 (10k filas) combinando dígitos
+  SELECT a.n + b.n*10 + c.n*100 + d.n*1000 AS n
+  FROM (SELECT 0 n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4
+        UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) a
+  CROSS JOIN (SELECT 0 n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4
+        UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) b
+  CROSS JOIN (SELECT 0 n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4
+        UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) c
+  CROSS JOIN (SELECT 0 n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4
+        UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) d
+) AS seq
+WHERE DATE_ADD('2018-01-01', INTERVAL seq.n DAY) BETWEEN '2018-01-01' AND '2026-12-31';

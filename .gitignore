@@ -1,0 +1,46 @@
+# --- Sistema y editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Python / Jupyter ---
+__pycache__/
+*.pyc
+*.pyo
+*.ipynb_checkpoints/
+
+# --- Node / JS (por si abres en VSCode con plugins) ---
+node_modules/
+npm-debug.log*
+
+# --- Docker ---
+mysql_data/
+common/
+*.log
+
+# --- Archivos temporales ---
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# --- CSVs grandes de staging ---
+staging/
+*.csv
+
+# --- Pentaho temporales ---
+.etl/.meta/
+*.lock
+
+# --- Power BI caché ---
+*.pbix~*
+*.pbit
+
+# --- Credenciales (si llegas a crear) ---
+*.env
+.env.local
+.env.development
+.env.production
+
+*.jar
