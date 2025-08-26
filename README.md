@@ -49,14 +49,14 @@ Dataset seleccionado de Kaggle:
 
 ## 📑 Requisitos de negocio e indicadores
 
-| Indicador             | Variables principales                             | Visualización sugerida       |
-| --------------------- | ------------------------------------------------- | ---------------------------- |
-| Ventas netas          | quantity, unit_price, discount_amount, net_amount | Tarjeta KPI + línea temporal |
-| Ticket promedio (AOV) | net_amount, order_id                              | Tarjeta KPI + línea          |
-| Margen bruto %        | net_amount, cost_amount, margin_amount            | Barra / semáforo             |
-| Tasa de recompra      | customer_id                                       | Barra temporal               |
-| Rating promedio       | reviews.rating, product_id                        | Gráfico de barras            |
-| Stock crítico         | inventory.stock_quantity, category_name           | Tarjeta + barra              |
+| Indicador             | Variables principales                             |
+| --------------------- | ------------------------------------------------- |
+| Ventas netas          | quantity, unit_price, discount_amount, net_amount |
+| Ticket promedio (AOV) | net_amount, order_id                              |
+| Margen bruto %        | net_amount, cost_amount, margin_amount            |
+| Tasa de recompra      | customer_id                                       |
+| Rating promedio       | reviews.rating, product_id                        |
+| Stock crítico         | inventory.stock_quantity, category_name           |
 
 ---
 
